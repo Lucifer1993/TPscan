@@ -3,6 +3,8 @@
 import time
 import urllib
 import requests
+import urllib3
+urllib3.disable_warnings()
 
 def thinkphp_checkcode_time_sqli_verify(url):
     pocdict = {

@@ -2,6 +2,8 @@
 # coding=utf-8
 import urllib
 import requests
+import urllib3
+urllib3.disable_warnings()
 
 def thinkphp_multi_sql_leak_verify(url):
     pocdict = {

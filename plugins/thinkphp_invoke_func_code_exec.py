@@ -3,6 +3,8 @@
 import re
 import urllib
 import requests
+import urllib3
+urllib3.disable_warnings()
 
 def thinkphp_invoke_func_code_exec_verify(url):
     pocdict = {

@@ -2,6 +2,8 @@
 # coding=utf-8
 import urllib
 import requests
+import urllib3
+urllib3.disable_warnings()
 
 def thinkphp_pay_orderid_sqli_verify(url):
     pocdict = {

@@ -2,6 +2,8 @@
 # coding=utf-8
 import urllib
 import requests
+import urllib3
+urllib3.disable_warnings()
 
 def thinkphp_driver_display_rce_verify(url):
     pocdict = {
