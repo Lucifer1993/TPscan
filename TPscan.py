@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # coding=utf-8
-from gevent import monkey;monkey.patch_all()
+from gevent import monkey;
+
+monkey.patch_all()
 from gevent.pool import Pool
+from termcolor import colored
 from plugins.thinkphp_checkcode_time_sqli import thinkphp_checkcode_time_sqli_verify
 from plugins.thinkphp_construct_code_exec import thinkphp_construct_code_exec_verify
 from plugins.thinkphp_construct_debug_rce import thinkphp_construct_debug_rce_verify
@@ -19,6 +22,7 @@ from plugins.thinkphp_view_recent_xff_sqli import thinkphp_view_recent_xff_sqli_
 
 import sys
 import gevent
+
 print('''
  ___________                    
 |_   _| ___ \                   
@@ -29,7 +33,8 @@ print('''
                 code by Lucifer
 ''')
 targeturl = input("[*]Give me a target: ")
-if targeturl.find('http') == -1:
+if targeturl.find('http') == -1 and targeturl.find('https') == -1:
+    print(colored("\n[*]Please input a valid url!", "red"))
     exit(1)
 poclist = [
     'thinkphp_checkcode_time_sqli_verify("{0}")'.format(targeturl),
@@ -48,9 +53,11 @@ poclist = [
     'thinkphp_view_recent_xff_sqli_verify("{0}")'.format(targeturl),
 ]
 
+
 def pocexec(pocstr):
     exec(pocstr)
     gevent.sleep(0)
+
 
 pool = Pool(10)
 threads = [pool.spawn(pocexec, item) for item in poclist]

